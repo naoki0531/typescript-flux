@@ -1,14 +1,18 @@
 import {Action} from './action';
 
 class Dispatcher {
-    callbacks: Function[];
+    _callbacks: Function[];
+
+    constructor() {
+        this._callbacks = [];
+    }
 
     register(callback: Function) {
-        this.callbacks.push(callback);
+        this._callbacks.push(callback);
     }
 
     dispatch(action: Action) {
-        for (const callback of this.callbacks) {
+        for (const callback of this._callbacks) {
             callback(action);
         }
     }
